@@ -1,0 +1,5 @@
+-User will create account(email, username, password, fName, lName)
+-User will be able to login with their username and password. 
+-create a task group
+-create a task 
+-about profile
