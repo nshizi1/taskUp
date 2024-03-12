@@ -1,25 +1,27 @@
 <?php
 
 if (isset($_SESSION["userName"])) {
-    $user = $_SESSION['userName'];
+    
     ?>
-    <header class="bg-stone-950 text-pink-50 flex justify-between p-4 items-center fixed top-0 w-full">
+    <header class="bg-stone-950 text-pink-50 flex justify-between py-4 px-10 items-center w-full">
         <div>
             <h2 class="text-2xl font-semibold">TaskUp</h2>
         </div>
         <!-- main links on the logout page -->
         <ul class="flex gap-4">
-            <li><a class="" href="#">Home</a></li>
-            <li><a class="" href="#">My Tasks</a></li>
+            <li><a class="" href="#">Dashboard</a></li>
+            <li><a class="" href="#">Add Task</a></li>
+            <li><a class="" href="#">Calendar</a></li>
+            <li><a class="" href="#">Completed Tasks</a></li>
             <li><a class="" href="#">Profile</a></li>
-            <li><a class="" href="#">Log Out</a></li>
         </ul>
+        <a class="" href="logOut.php">Log Out</a>
     </header>
     <?php
 } else {
 
     ?>
-    <header class="bg-stone-950 text-pink-50 flex justify-between p-4 items-center fixed top-0 w-full">
+    <header class="bg-stone-950 text-pink-50 flex justify-between py-4 px-10 items-center fixed top-0 w-full">
         <div>
             <h2 class="text-2xl font-semibold">TaskUp</h2>
         </div>
