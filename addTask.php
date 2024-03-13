@@ -4,6 +4,10 @@ include("conn.php");
 session_start();
 if ($_SESSION["userName"]) {
     $user = $_SESSION['userName'];
+    $date = date("Y-m-d");
+    $getUserId = mysqli_query($conn, "SELECT * FROM users where username = '$user' ");
+    $row = mysqli_fetch_assoc($getUserId);
+    $userId = $row['userId'];
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -20,25 +24,25 @@ if ($_SESSION["userName"]) {
     <body>
         <?php include("header.php"); ?>
         <main class="h-screen flex items-center justify-center">
-            <form action="#">
-                <h2>Add new task</h2>
-                <div>
-                    <div>
-                        <label for="title">Title:</label>
-                        <input type="text" name="name" id="title">
+            <form class="shadow-md shadow-sky-300 p-4 rounded-md flex flex-col gap-4" action="" method="post">
+                <h2 class="text-center text-3xl font-bold text-sky-700">Add new task</h2>
+                <div class="flex gap-4">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sky-700" for="title">Title:</label>
+                        <input class="border p-2 outline-none rounded-md " type="text" name="name" required id="title">
                     </div>
-                    <div>
-                        <label for="dueDate">Due date:</label>
-                        <input type="text" name="dueDate" id="dueDate">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sky-700" for="dueDate">Due date:</label>
+                        <input class="border p-2 outline-none rounded-md" type="date" min="<?php echo $date ?>" name="dueDate" required id="dueDate">
                     </div>
                 </div>
-                <div>
-                    <label for="description">Description:</label>
-                    <textarea class="resize-none" name="description" id="description"></textarea>
+                <div class="flex flex-col gap-2">
+                    <label class="text-sky-700" for="description">Description:</label>
+                    <textarea class="border p-2 outline-none rounded-md resize-none" name="description" required id="description"></textarea>
                 </div>
-                <div>
-                    <button type="reset">Reset</button>
-                    <button type="submit" name="submit">Add Task</button>
+                <div class="flex gap-4 justify-center">
+                    <button class="border-2 text-red-500 border-red-300 px-6 py-2 rounded-md" type="reset">Reset</button>
+                    <button class="border-2 border-green-700 bg-green-700 text-gray-50 px-6 py-2 rounded-md" type="submit" name="submit">Add Task</button>
                 </div>
                 </div>
             </form>
@@ -47,6 +51,20 @@ if ($_SESSION["userName"]) {
 
     </html>
     <?php
+    if(isset($_POST["submit"])){
+        $name = $_POST["name"];
+        $dueDate = $_POST["dueDate"];
+        $description = $_POST["description"];
+        $query = "INSERT INTO tasks(userId, taskName, dueDate, description) VALUES('$userId','$name', '$dueDate', '$description')";
+        $result = mysqli_query($conn, $query);
+        if($result){
+            echo "<script>alert('Task added successfully');</script>";
+            echo "<script>window.location.href='index.php';</script>";
+        }
+        else{
+            echo "<script>alert('Task not added, try again');</script>";
+        }
+    }
 } else {
     header("location:logIn.php");
 }
