@@ -10,7 +10,7 @@ if (isset($_SESSION["userName"])) {
         <!-- main links on the logout page -->
         <ul class="flex gap-4">
             <li><a class="" href="index.php">Dashboard</a></li>
-            <li><a class="" href="#">Add Task</a></li>
+            <li><a class="" href="addTask.php">Add Task</a></li>
             <li><a class="" href="#">Calendar</a></li>
             <li><a class="" href="#">Completed Tasks</a></li>
             <li><a class="" href="#">Profile</a></li>

@@ -10,7 +10,7 @@ if ($_SESSION["userName"]) {
         $greeting = "Good Early Morning, ";
     } elseif ($currentHour >= 5 && $currentHour < 12) {
         $greeting = "Good Morning, ";
-    } elseif ($currentHour >= 12 && $currentHour < 18) {
+    } elseif ($currentHour >= 12 && $currentHour < 17) {
         $greeting = "Good Afternoon, ";
     } else {
         $greeting = "Good Evening, ";
@@ -21,6 +21,20 @@ if ($_SESSION["userName"]) {
     $userId = $row['userId'];
     $getTasks = mysqli_query($conn, "SELECT * FROM tasks WHERE userId ='$userId' order by completed");
     $count = 1;
+    $total = mysqli_num_rows($getTasks);
+    $getCompleted = mysqli_query($conn, "SELECT * FROM tasks WHERE userId ='$userId' AND completed=1");
+    $completed = mysqli_num_rows($getCompleted);
+    // get today's date
+    $date = date("Y-m-d");
+    $getToday = mysqli_query($conn, "SELECT * FROM tasks WHERE userId ='$userId' AND dueDate='$date' AND completed=0");
+    $today = mysqli_num_rows($getToday);
+
+    // missed based on today's date
+    $getMissed = mysqli_query($conn, "SELECT * FROM tasks WHERE userId ='$userId' AND dueDate<'$date' AND completed=0");
+    $missed = mysqli_num_rows($getMissed);
+
+    $getAwaiting = mysqli_query($conn, "SELECT * FROM tasks WHERE userId ='$userId' AND dueDate>='$date' AND completed=0");
+    $awaiting = mysqli_num_rows($getAwaiting);
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -51,22 +65,26 @@ if ($_SESSION["userName"]) {
                     </span>
                 </h1>
             </div>
-            <div class="grid grid-cols-4 mt-4 gap-4">
+            <div class="grid grid-cols-5 mt-4 gap-4">
                 <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
                     <p class="text-xl font-semibold text-sky-800">Total tasks</p>
-                    <p class="text-3xl font-bold text-sky-700">30</p>
+                    <p class="text-3xl font-bold text-sky-700"><?php echo $total ?></p>
                 </div>
                 <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
                     <p class="text-xl font-semibold text-sky-800">Completed tasks</p>
-                    <p class="text-3xl font-bold text-sky-700">10</p>
+                    <p class="text-3xl font-bold text-sky-700"><?php echo $completed ?></p>
                 </div>
                 <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
                     <p class="text-xl font-semibold text-sky-800">Today's tasks</p>
-                    <p class="text-3xl font-bold text-sky-700">5</p>
+                    <p class="text-3xl font-bold text-sky-700"><?php echo $today ?></p>
                 </div>
                 <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
                     <p class="text-xl font-semibold text-sky-800">Missed tasks</p>
-                    <p class="text-3xl font-bold text-sky-700">2</p>
+                    <p class="text-3xl font-bold text-sky-700"><?php echo $missed ?></p>
+                </div>
+                <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
+                    <p class="text-xl font-semibold text-sky-800">Awaiting tasks</p>
+                    <p class="text-3xl font-bold text-sky-700"><?php echo $awaiting ?></p>
                 </div>
             </div>
             <div class="my-4">
@@ -94,22 +112,22 @@ if ($_SESSION["userName"]) {
                             }
                             ?>
                             <tr>
-                                <td>
+                                <td class="">
                                     <?php echo $count++ ?>
                                 </td>
-                                <td>
+                                <td class="">
                                     <?php echo $row['taskName'] ?>
                                 </td>
-                                <td>
+                                <td class="">
                                     <?php echo $row['dueDate'] ?>
                                 </td>
-                                <td>
+                                <td class="">
                                     <?php echo $row['createdAt'] ?>
                                 </td>
-                                <td><span class="<?php echo $class ?>">
+                                <td class=""><span class="<?php echo $class ?>">
                                         <?php echo $completed ?>
                                     </span></td>
-                                <td><a class="text-sky-500 hover:underline" href="#"><i class="fa-solid fa-ellipsis"></i></a></td>
+                                <td class=""><a class="text-sky-500 hover:underline" href="#"><i class="hover:bg-sky-200 transition ease-in-out py-2 px-4 rounded-md fa-solid fa-ellipsis"></i></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>
