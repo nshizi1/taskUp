@@ -4,19 +4,6 @@ include("conn.php");
 session_start();
 if ($_SESSION["userName"]) {
     $user = $_SESSION['userName'];
-    // generating greeting according to the time
-    // date_default_timezone_set('Asia/Kolkata');
-    // $time = date("H:i:s");
-    // if ($time >= "08:00:00" && $time <= "17:00:00") {
-    //     $greeting = "Good Morning";
-    // } elseif ($time >= "17:00:00" && $time <= "23:59:59") {
-    //     $greeting = "Good Afternoon";
-    // } elseif ($time >= "00:00:00" && $time <= "07:59:59") {
-    //     $greeting = "Good Evening";
-    // } else {
-    //     $greeting = "Good Night";
-    // }
-    // echo $greeting;
 
     $currentHour = date('G');
     if ($currentHour >= 0 && $currentHour < 5) {
@@ -43,7 +30,27 @@ if ($_SESSION["userName"]) {
     <body>
         <?php include("header.php"); ?>
         <main class="px-10">
-            <h1><?php echo $greeting.$user ?></h1>
+            <div class="bg-sky-100 mt-4 p-4 rounded-md shadow-md shadow-sky-200">
+                <h1 class="text-xl font-semibold text-sky-500"><?php echo $greeting ?><span class="font-bold uppercase text-pink-500"><?php echo $user ?></span></h1>
+            </div>
+            <div class="grid grid-cols-4 mt-4 gap-4">
+                <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
+                    <p class="text-xl font-semibold text-sky-800">Total tasks</p>
+                    <p class="text-3xl font-bold text-sky-700">30</p>
+                </div>
+                <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
+                    <p class="text-xl font-semibold text-sky-800">Completed tasks</p>
+                    <p class="text-3xl font-bold text-sky-700">10</p>
+                </div>
+                <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
+                    <p class="text-xl font-semibold text-sky-800">Today's tasks</p>
+                    <p class="text-3xl font-bold text-sky-700">5</p>
+                </div>
+                <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
+                    <p class="text-xl font-semibold text-sky-800">Missed tasks</p>
+                    <p class="text-3xl font-bold text-sky-700">2</p>
+                </div>
+            </div>
         </main>
     </body>
 
