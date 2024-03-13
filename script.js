@@ -1,0 +1,1 @@
+const table = $('#example').DataTable();
