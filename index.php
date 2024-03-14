@@ -127,7 +127,7 @@ if ($_SESSION["userName"]) {
                                 <td class=""><span class="<?php echo $class ?>">
                                         <?php echo $completed ?>
                                     </span></td>
-                                <td class=""><a class="text-sky-500 hover:underline" href="#"><i class="hover:bg-sky-200 transition ease-in-out py-2 px-4 rounded-md fa-solid fa-ellipsis"></i></a></td>
+                                <td class=""><a class="text-sky-500 hover:underline" href="taskDetail.php?taskName=<?php echo $row["taskName"] ?>&& taskId=<?php echo $row["taskId"] ?>"><i class="hover:bg-sky-200 transition ease-in-out py-2 px-4 rounded-md fa-solid fa-ellipsis"></i></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>
