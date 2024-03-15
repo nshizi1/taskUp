@@ -17,7 +17,8 @@ if ($_SESSION["userName"]) {
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Task Details | <?php echo $user ?>
+            <title>Task Details |
+                <?php echo $user ?>
             </title>
             <script defer src="update.js"></script>
             <?php include ("tailwind.html") ?>
@@ -34,8 +35,12 @@ if ($_SESSION["userName"]) {
                 <div class="mt-4">
                     <div class="mt-4 p-4 rounded-md shadow-md shadow-gray-200">
                         <form action="" method="post" class="flex gap-4 justify-end">
-                            <button id="updateData" class="py-2 px-6 rounded-md transition ease-in-out hover:bg-sky-500 text-gray-50 bg-sky-600">Update Task</button>
-                            <button id="demo" class="py-2 px-6 rounded-md transition ease-in-out hover:bg-green-500 text-gray-50 bg-green-600">Complete Task</button>
+                            <button id="updateData"
+                                class="py-2 px-6 rounded-md transition ease-in-out hover:bg-sky-500 text-gray-50 bg-sky-600">Update
+                                Task</button>
+                            <button id="complete"
+                                class="py-2 px-6 rounded-md transition ease-in-out hover:bg-green-500 text-gray-50 bg-green-600">Complete
+                                Task</button>
                         </form>
                     </div>
                     <?php
@@ -46,8 +51,10 @@ if ($_SESSION["userName"]) {
                         } else {
                             $completed = "Completed";
                         }
+                        $date = date("Y-m-d");
                         ?>
                         <div id="view" class="mt-4 p-4 rounded-md shadow-md shadow-gray-200 grid grid-cols-2 gap-4">
+                            <h3>This is the view tab</h3>
                             <div>
                                 <h4 class="font-semibold text-xl text-gray-600">Name: <span class="text-sky-800">
                                         <?php echo $data["taskName"] ?>
@@ -75,15 +82,27 @@ if ($_SESSION["userName"]) {
                                 </p>
                             </div>
                         </div>
-                        <div id="edit" class="hidden shadow-md p-4 mt-4 rounded-md">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid veniam ea sapiente? Magnam voluptatibus ipsam aperiam sequi. Alias, cumque sunt.</p>
-                        </div>
+                        <form method="post" action="" id="edit" class="hidden mt-4 p-4 rounded-md shadow-md shadow-gray-200 grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="text-xl text-gray-600">Name: </h4>
+                                <input class="w-full text-sky-800 outline-none border-2 border-sky-800 px-2 py-1 rounded-md" type="text" name="" value="<?php echo $data["taskName"] ?>" id="" required>
+                            </div>
+                            <div>
+                                <h4 class="text-xl text-gray-600">Due Date: </h4>
+                                <input class="w-full text-sky-800 outline-none border-2 border-sky-800 px-2 py-1 rounded-md" type="date" min="<?php echo $date ?>" name="" value="<?php echo $data["dueDate"] ?>" id="" required>
+                            </div>
+                            <div class="col-span-2">
+                                <h4 class="text-xl text-gray-600">Description: </h4>
+                                <textarea class="w-full text-sky-800 outline-none border-2 border-sky-800 px-2 py-1 rounded-md resize-none" name="" required><?php echo $data["description"] ?></textarea>
+                            </div>
+                            <button class="py-2 px-6 rounded-md transition ease-in-out hover:bg-green-500 text-gray-50 bg-green-600 w-fit" type="submit">Update task</button>
+                        </form>
                     <?php } ?>
                 </div>
 
             </main>
         </body>
-            
+
         </html>
         <?php
     } else {

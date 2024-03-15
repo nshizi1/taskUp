@@ -5,19 +5,23 @@ document.addEventListener("click", function (event) {
         document.getElementById("view").classList.remove("grid");
         document.getElementById("view").classList.add("hidden");
         document.getElementById("edit").classList.remove("hidden");
-        document.getElementById("edit").classList.add("block");
+        document.getElementById("edit").classList.add("grid");
         event.target.setAttribute("id", "ViewData");
+        event.target.textContent = "View Task";
+        document.getElementById("complete").classList.add("hidden");
     } else if (event.target.id === "ViewData") {
         event.preventDefault();
         console.log("Hello view");
         document.getElementById("view").classList.add("grid");
         document.getElementById("view").classList.remove("hidden");
         document.getElementById("edit").classList.add("hidden");
-        document.getElementById("edit").classList.remove("block");
+        document.getElementById("edit").classList.remove("grid");
         event.target.setAttribute("id", "updateData");
-    }else if(event.target.id === "demo") {
+        event.target.textContent = "Update Task";
+        document.getElementById("complete").classList.remove("hidden");
+    }else if(event.target.id === "complete") {
         event.preventDefault();
-        console.log("Hello demo");
+        console.log("Hello complete");
     }
 });
 
