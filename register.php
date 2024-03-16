@@ -12,7 +12,7 @@ session_start();
 include("conn.php");
 ?>
 
-<body class="h-screen">
+<body class=" font-poppins h-screen">
     <?php include("header.php"); ?>
     <main class="bg-gray-50 h-screen flex flex-col items-center justify-center gap-4">
         <form class="w-1/3 shadow-md shadow-stone-800 p-4 rounded-md flex flex-col gap-4" action="" method="post">

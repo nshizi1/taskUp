@@ -12,11 +12,11 @@ session_start();
 include("conn.php");
 ?>
 
-<body class="h-screen">
+<body class="font-poppins h-screen text-sm">
     <?php include("header.php"); ?>
     <main class="bg-gray-50 h-screen flex flex-col items-center justify-center gap-4">
         <form class="w-1/3 shadow-md shadow-stone-800 p-4 rounded-md flex flex-col gap-4" action="" method="post">
-            <h2 class="text-center text-3xl font-bold text-sky-700">Sign In</h2>
+            <h2 class="text-center text-3xl font-semibold text-sky-700">Sign In</h2>
             <div class="flex flex-col gap-2">
                 <label class="text-sky-700" for="userName">Username:</label>
                 <input class="p-2 outline-none border rounded-md" type="text" name="userName" id="">
@@ -35,7 +35,7 @@ include("conn.php");
             <div class="flex justify-center">
                 <button name="submit"
                     class="bg-green-700 hover:bg-green-600 transition ease-in-out w-full py-3 rounded-md text-gray-50"
-                    type="submit">Log In</button>
+                    type="submit">LOG IN <i class="ml-2 fa-solid fa-right-to-bracket"></i></button>
             </div>
             <div>
                 <p class="text-center">Don't have account? <a class="text-sky-700" href="register.php">Sign Up</a></p>

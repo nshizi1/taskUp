@@ -24,26 +24,34 @@ if ($_SESSION["userName"]) {
             <?php include ("tailwind.html") ?>
         </head>
 
-        <body>
+        <body class="font-poppins">
             <?php include_once ("header.php") ?>
             <main class="px-10">
-                <div class="bg-sky-100 mt-4 p-4 rounded-md shadow-md shadow-sky-200">
-                    <h2 class="text-xl font-semibold text-sky-500">Task Details | <span class="text-pink-400">
-                            <?php echo $taskName ?>
-                        </span></h2>
-                </div>
+                <form action="" method="POST" class="bg-sky-100 mt-4 p-4 rounded-md shadow-md shadow-sky-200 flex items-center justify-between">
+                    <h2 class="text-base font-semibold text-sky-500">Task Details | <span class="text-pink-400"> <?php echo $taskName ?> </span></h2>
+                    <button name="deleteTask" class="text-sm py-2 px-6 rounded-md transition ease-in-out hover:bg-red-500 text-gray-50 bg-red-600" type="submit">Delete Task</button>
+                </form>
                 <div class="mt-4">
                     <div class="mt-4 p-4 rounded-md shadow-md shadow-gray-200">
                         <form action="" method="POST" class="flex gap-4 justify-end">
                             <button id="updateData" type="submit"
-                                class="py-2 px-6 rounded-md transition ease-in-out hover:bg-sky-500 text-gray-50 bg-sky-600">Update
+                                class="text-sm py-2 px-6 rounded-md transition ease-in-out hover:bg-sky-500 text-gray-50 bg-sky-600">Update
                                 Task</button>
                             <button id="complete" type="submit"
-                                class="py-2 px-6 rounded-md transition ease-in-out hover:bg-green-500 text-gray-50 bg-green-600"
+                                class="text-sm py-2 px-6 rounded-md transition ease-in-out hover:bg-green-500 text-gray-50 bg-green-600"
                                 name="completeTask">Complete Task</button>
                         </form>
                     </div>
                     <?php
+                    if(isset($_POST["deleteTask"])){
+                        $deleteTask = mysqli_query($conn, "DELETE FROM tasks WHERE taskId = '$taskId' AND userId = '$userId' ");
+                        if ($deleteTask) {
+                            echo "<script>alert('Task deleted successfully');
+                            window.location.href='index.php';</script>";
+                        } else {
+                            echo "<script>alert('Task not deleted');</script>";
+                        }
+                    }
                     if (isset ($_POST["completeTask"])) {
                         $checkCompleted = mysqli_query($conn, "SELECT * FROM tasks where completed = 1 AND taskId = '$taskId'");
                         if (mysqli_num_rows($checkCompleted) > 0) {
@@ -70,28 +78,28 @@ if ($_SESSION["userName"]) {
                         ?>
                         <div id="view" class="mt-4 p-4 rounded-md shadow-md shadow-gray-200 grid grid-cols-2 gap-4">
                             <div>
-                                <h4 class="font-semibold text-xl text-gray-600">Name: <span class="text-sky-800">
+                                <h4 class="font-semibold text-base text-gray-600">Name: <span class="text-sky-800">
                                         <?php echo $data["taskName"] ?>
                                     </span></h4>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-xl text-gray-600">Due Date: <span class="text-sky-800">
+                                <h4 class="font-semibold text-base text-gray-600">Due Date: <span class="text-sky-800">
                                         <?php echo $data["dueDate"] ?>
                                     </span></h4>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-xl text-gray-600">Created At: <span class="text-sky-800">
+                                <h4 class="font-semibold text-base text-gray-600">Created At: <span class="text-sky-800">
                                         <?php echo $data["createdAt"] ?>
                                     </span></h4>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-xl text-gray-600">Completed: <span class="text-sky-800">
+                                <h4 class="font-semibold text-base text-gray-600">Completed: <span class="text-sky-800">
                                         <?php echo $completed ?>
                                     </span></h4>
                             </div>
                             <div class="col-span-2">
-                                <label class="font-semibold text-xl text-gray-600" for="">Description:</label>
-                                <p class="font-semibold text-xl text-sky-800">
+                                <label class="font-semibold text-base text-gray-600" for="">Description:</label>
+                                <p class="font-semibold text-base text-sky-800">
                                     <?php echo $data["description"] ?>
                                 </p>
                             </div>
@@ -99,24 +107,24 @@ if ($_SESSION["userName"]) {
                         <form method="POST" action="" id="edit"
                             class="hidden mt-4 p-4 rounded-md shadow-md shadow-gray-200 grid-cols-2 gap-4">
                             <div>
-                                <h4 class="text-xl text-gray-600">Name: </h4>
+                                <h4 class="text-base text-gray-600">Name: </h4>
                                 <input class="w-full text-sky-800 outline-none border mt-2 border-sky-800 px-2 py-1 rounded-md"
                                     type="text" name="name" value="<?php echo $data["taskName"] ?>" id="" required>
                             </div>
                             <div>
-                                <h4 class="text-xl text-gray-600">Due Date: </h4>
+                                <h4 class="text-base text-gray-600">Due Date: </h4>
                                 <input class="w-full text-sky-800 outline-none border mt-2 border-sky-800 px-2 py-1 rounded-md"
                                     type="date" min="<?php echo $date ?>" name="dueDate" value="<?php echo $data["dueDate"] ?>"
                                     id="" required>
                             </div>
                             <div class="col-span-2">
-                                <h4 class="text-xl text-gray-600">Description: </h4>
+                                <h4 class="text-base text-gray-600">Description: </h4>
                                 <textarea
                                     class="w-full text-sky-800 outline-none border mt-2 border-sky-800 px-2 py-1 rounded-md resize-none"
                                     name="description" required><?php echo $data["description"] ?></textarea>
                             </div>
                             <button
-                                class="py-2 px-6 rounded-md transition ease-in-out hover:bg-green-500 text-gray-50 bg-green-600 w-fit"
+                                class="text-sm py-2 px-6 rounded-md transition ease-in-out hover:bg-green-500 text-gray-50 bg-green-600 w-fit"
                                 type="submit" name="update">Update task</button>
                         </form>
                     <?php } ?>

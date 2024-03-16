@@ -55,11 +55,11 @@ if ($_SESSION["userName"]) {
         <?php include("tailwind.html") ?>
     </head>
 
-    <body>
+    <body class="font-poppins">
         <?php include("header.php"); ?>
         <main class="px-10">
             <div class="bg-sky-100 mt-4 p-4 rounded-md shadow-md shadow-sky-200">
-                <h1 class="text-xl font-semibold text-sky-500">
+                <h1 class="text-base font-semibold text-sky-500">
                     <?php echo $greeting ?><span class="font-bold uppercase text-pink-500">
                         <?php echo $user ?>
                     </span>
@@ -67,36 +67,36 @@ if ($_SESSION["userName"]) {
             </div>
             <div class="grid grid-cols-5 mt-4 gap-4">
                 <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
-                    <p class="text-xl font-semibold text-sky-800">Total tasks</p>
-                    <p class="text-3xl font-bold text-sky-700"><?php echo $total ?></p>
+                    <p class="text-lg font-semibold text-sky-800">Total tasks</p>
+                    <p class="text-2xl font-bold text-sky-700"><?php echo $total ?></p>
                 </div>
                 <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
-                    <p class="text-xl font-semibold text-sky-800">Completed tasks</p>
-                    <p class="text-3xl font-bold text-sky-700"><?php echo $completed ?></p>
+                    <p class="text-lg font-semibold text-sky-800">Completed tasks</p>
+                    <p class="text-2xl font-bold text-sky-700"><?php echo $completed ?></p>
                 </div>
                 <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
-                    <p class="text-xl font-semibold text-sky-800">Today's tasks</p>
-                    <p class="text-3xl font-bold text-sky-700"><?php echo $today ?></p>
+                    <p class="text-lg font-semibold text-sky-800">Today's tasks</p>
+                    <p class="text-2xl font-bold text-sky-700"><?php echo $today ?></p>
                 </div>
                 <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
-                    <p class="text-xl font-semibold text-sky-800">Missed tasks</p>
-                    <p class="text-3xl font-bold text-sky-700"><?php echo $missed ?></p>
+                    <p class="text-lg font-semibold text-sky-800">Missed tasks</p>
+                    <p class="text-2xl font-bold text-sky-700"><?php echo $missed ?></p>
                 </div>
                 <div class="bg-sky-200 p-5 rounded-md shadow-md shadow-sky-300">
-                    <p class="text-xl font-semibold text-sky-800">Awaiting tasks</p>
-                    <p class="text-3xl font-bold text-sky-700"><?php echo $awaiting ?></p>
+                    <p class="text-lg font-semibold text-sky-800">Awaiting tasks</p>
+                    <p class="text-2xl font-bold text-sky-700"><?php echo $awaiting ?></p>
                 </div>
             </div>
             <div class="my-4">
                 <table id="example" class="table table-striped rounded-md" style="width:100%">
                     <thead class="bg-sky-200">
                         <tr>
-                            <th class="">No</th>
-                            <th class="">Task Name</th>
-                            <th class="">Due Date</th>
-                            <th class="">Created At</th>
-                            <th class="">Completed</th>
-                            <th class="">Action</th>
+                            <th class="text-sm">No</th>
+                            <th class="text-sm">Task Name</th>
+                            <th class="text-sm">Due Date</th>
+                            <th class="text-sm">Created At</th>
+                            <th class="text-sm">Completed</th>
+                            <th class="text-sm">Action</th>
                         </tr>
                     </thead>
                     <tbody id="datas">
@@ -112,22 +112,22 @@ if ($_SESSION["userName"]) {
                             }
                             ?>
                             <tr>
-                                <td class="">
+                                <td class="text-sm">
                                     <?php echo $count++ ?>
                                 </td>
-                                <td class="">
+                                <td class="text-sm">
                                     <?php echo $row['taskName'] ?>
                                 </td>
-                                <td class="">
+                                <td class="text-sm">
                                     <?php echo $row['dueDate'] ?>
                                 </td>
-                                <td class="">
+                                <td class="text-sm">
                                     <?php echo $row['createdAt'] ?>
                                 </td>
-                                <td class=""><span class="<?php echo $class ?>">
+                                <td class="text-sm"><span class="<?php echo $class ?>">
                                         <?php echo $completed ?>
                                     </span></td>
-                                <td class=""><a class="text-sky-500 hover:underline" href="taskDetail.php?taskName=<?php echo $row["taskName"] ?>&& taskId=<?php echo $row["taskId"] ?>"><i class="hover:bg-sky-200 transition ease-in-out py-2 px-4 rounded-md fa-solid fa-ellipsis"></i></a></td>
+                                <td class="text-sm"><a class="text-sky-500 hover:underline" href="taskDetail.php?taskName=<?php echo $row["taskName"] ?>&& taskId=<?php echo $row["taskId"] ?>"><i class="hover:bg-sky-200 transition ease-in-out py-2 px-4 rounded-md fa-solid fa-ellipsis"></i></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>
