@@ -20,7 +20,7 @@ if ($_SESSION["userName"]) {
             <title>Task Details |
                 <?php echo $user ?>
             </title>
-            <script defer src="update.js"></script>
+            
             <?php include ("tailwind.html") ?>
         </head>
 
