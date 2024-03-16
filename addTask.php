@@ -59,7 +59,7 @@ if ($_SESSION["userName"]) {
         $result = mysqli_query($conn, $query);
         if($result){
             echo "<script>alert('Task added successfully');</script>";
-            echo "<script>window.location.href='index.php';</script>";
+            echo "<script>window.location.href='x.php';</script>";
         }
         else{
             echo "<script>alert('Task not added, try again');</script>";
