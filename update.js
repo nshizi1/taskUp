@@ -19,9 +19,6 @@ document.addEventListener("click", function (event) {
         event.target.setAttribute("id", "updateData");
         event.target.textContent = "Update Task";
         document.getElementById("complete").classList.remove("hidden");
-    }else if(event.target.id === "complete") {
-        event.preventDefault();
-        console.log("Hello complete");
     }
 });
 
